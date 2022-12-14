@@ -1,54 +1,67 @@
 
 1. list of all git subcommand
-		git help --all
+                git help --all
 
 2. git version number
-		git --version
+                git --version
 
 3. add commit in reposotory
+                git commit -m "commitMessage"
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+In addition to actual changes to the directory and to file contents, Git records several
+other pieces of metadata with each commit, including a log message and the author of
+the change. A fully qualified git commit command supplies a log message and an author:
+
+        git commit -m "Initial contents of public_html" \
+                        --author="Jon Loeliger <jdl@example.com>"
+
+-------------------------------------------------------------------------------------------------------------------------------
 
 3. to change commit message for latest commit
-		 git commit --amend 
+                 git commit --amend
 
 4. Adding a file to your reposotory
-	 - to add perticulat file with filename
-		git add "yourFileName"
+         - to add perticulat file with filename
+                git add "yourFileName"
 
-	- to add all file in that directory
-		git add .
+        - to add all file in that directory
+                git add .
 
---------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------
+
 Note: git add is for only staging the file and its ready to comit
--------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------------------
+
 
 5. to unstage the added file
-	git rm --cached "fileNameToUnstage"
+        git rm --cached "fileNameToUnstage"
 
 6. to check in-between status of the file , i.e between staged and commit
-	git status
+        git status
 
---------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------
 
 -------------------------------------------------
 
-7. show-branch, provides concise, one-line summaries for the current development branch
-	-Sumerry about latest commit
-		git show-branch 
-	- sumerry about "k" number of commit from last commit
-		git show-branch --more=k
+7. to see sequential history of your commit with reposotory
+                git log
 
-8. Viewing commit difference
-	git diff hashValueOfYourCommit_1 \
-		hashValueOfYourCommit_2
-	( hash/value comes from " git log ", + show insertion and - show deletion )
+8. to  see detailed about perticular commit
+                git show "commitHashValue"
 
-9 .
+9. show-branch, provides concise, one-line summaries for the current development branch
+        -Sumerry about latest commit
+                git show-branch
+        - sumerry about "k" number of commit from last commit
+                git show-branch --more=k
 
-
-
-
-
-
+10. Viewing commit difference
+        git diff hashValueOfYourCommit_1 \
+                hashValueOfYourCommit_2
+        ( hash/value comes from " git log ", + show insertion and - show deletion )
 
 
 
