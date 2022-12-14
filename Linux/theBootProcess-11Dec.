@@ -1,0 +1,10 @@
+Boot Process is defined as the number of process run behind the scene from 
+the time you press power button till it turn on and get functioning
+
+
+Power On -->  BIOS  -->    Master Boot Record(MBR)  --> Boot Loader -->  Kernel --> Initial Ram disk(initramfs image) -->  parent Process (/sbin/init)  --> command Shell -->  X-Windows System (GUI)
+
+
+
+                        
+
