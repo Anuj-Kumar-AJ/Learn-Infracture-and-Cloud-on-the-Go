@@ -1,0 +1,70 @@
+
+1. list of all git subcommand
+		git help --all
+
+2. git version number
+		git --version
+
+3. add commit in reposotory
+
+3. to change commit message for latest commit
+		 git commit --amend 
+
+4. Adding a file to your reposotory
+	 - to add perticulat file with filename
+		git add "yourFileName"
+
+	- to add all file in that directory
+		git add .
+
+--------------------------------------------------------
+Note: git add is for only staging the file and its ready to comit
+-------------------------------------------------------
+
+5. to unstage the added file
+	git rm --cached "fileNameToUnstage"
+
+6. to check in-between status of the file , i.e between staged and commit
+	git status
+
+--------------------------------------------------
+
+-------------------------------------------------
+
+7. show-branch, provides concise, one-line summaries for the current development branch
+	-Sumerry about latest commit
+		git show-branch 
+	- sumerry about "k" number of commit from last commit
+		git show-branch --more=k
+
+8. Viewing commit difference
+	git diff hashValueOfYourCommit_1 \
+		hashValueOfYourCommit_2
+	( hash/value comes from " git log ", + show insertion and - show deletion )
+
+9 .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
