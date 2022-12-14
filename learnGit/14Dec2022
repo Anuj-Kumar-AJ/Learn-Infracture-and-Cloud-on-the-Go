@@ -1,0 +1,85 @@
+
+1. Removing file from git reposotory(2 step)
+	git rm fileName                       (stage the change)
+	git commit -m "FileRemoves"           (commited the change)
+
+2. Renaming file in git repo
+	mv PreviousName FinalName
+	git rm PreviousName
+	git add FinalName
+	git commit -m "message"
+
+3. to make a clone of the repo from github 
+	git clone "url"
+
+
+-----------------------------------------------------------------
+++++++++++++++++++    Configuration File +++++++++++++++++++++
+
+
+Like many tools, Git supports a hierarchy of configuration files. In decreasing
+precedence they are:
+
+.git/config
+	Repository-specific configuration settings manipulated with the --file option or by default.
+	 These settings have the highest precedence.
+
+~/.gitconfig
+	User-specific configuration settings manipulated with the --global option.
+
+/etc/gitconfig
+	System-wide configuration settings manipulated with the --system option if you
+	have proper Unix file write permissions on it. These settings have the lowest prece-
+	dence. Depending on your actual installation, the system settings file might be
+	somewhere else (perhaps in /usr/local/etc/gitconfig), or may be entirely absent.
+
+
+------------------------------------------------------------------
+
+4. to establish an author name and email address that will be used on all the commits in every reposotories
+	
+	git config --global user.name "UserName"
+	git config --global user.email "User@email"
+
+5. to set a repository-specific name and email address that would override a --global setting, simply omit the --global flag
+	
+	git config user.name "username"
+	git config user.email "userenail"
+
+6. to list the settings of all the variables collectively found in the 0complete set of configuration files: 
+	
+	git config -l
+
+7. to remove configuration setting
+	
+	git config --unset --global setting_parameter(user.email)	
+
+8. Configuring an alias
+	git config --global alias."AliasName" \
+		'long command which is converted to alias"
+	
+    eg,	git config --global alias.show-graph \
+		'log --graph --abbrev-commit --pretty=oneline'
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------
+++++++++++++++++++  Basic Git Concepts	+++++++++++++++++++++++++
+
+ 
+
+
+
+
+
+
+
+
+
