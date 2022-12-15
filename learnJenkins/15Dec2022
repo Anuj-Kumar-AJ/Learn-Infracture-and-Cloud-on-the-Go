@@ -1,0 +1,73 @@
+--------------------------------------------------------------------
+
+    World before Jenkins: - 
+        - Problem of waiting for code PR to validate , after pushing to resting environment
+        - Problem of night build , can only update version og product at night
+    
+    What is Jenkins :-
+
+        It is CI/CD tool, help in continuous integrationand deployment
+
+    What Proble Jenkinf Solve
+    
+        - It help in running automated test in testing environment within jenkinsserver
+        - dont have to wait for tester to test code manually and developer get feedback quickly of its PR
+        - Can create build continuously which helps company to release new version of their product quickly
+
+
+    Jenkins server Architecture
+        
+        - when code is submitted in code repo storage like github,
+        - Jenkins take the code from code storage and run the test on Jenkins server
+        - Lets talk about jenkins server architecture
+            - jenking have a master server and slave server 
+            - slave server have different environment like windows, macOS, linux
+            - master node send the testing to slave node and take feedback related to testing of the code
+            - then master node send feedback to the developer about their code if its test passes or not
+
+----------------------------------------------------------------------
+
+1. enable the Jenkins service to start at boot
+    	sudo systectl enable jenkins
+
+2. start jenkins service
+    	sudo systemctl start jenkins
+
+3. check status of jenkins service
+    	sudo systemctl status jenkins
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
