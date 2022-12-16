@@ -1,0 +1,159 @@
+
+---------------------------------------------------
+ +++++++++++++++++  Getting started with pipeline   ++++++        
+
+    what is free style job?
+        
+        free style job is single job you will perform 
+    
+    what is pipeline job ?
+        it can be said that is collection of jobs 
+    
+       -  before there is freesytle jobs only and user wired these multiple jobs together 
+             to perform certain task
+       
+       -  pipleline will let us manage all these series of task througth code. 
+
+        - its important to note that pipeline is durable but freestyle is not
+            meaning is that while dureing job processing , jenkins server shutDowned.
+            the freestyle job will stops excecuting when server get back online,
+            but pipeline will continue to execute where is ti stoped before
+
+
+    
+    Pipeline concepts :- 
+        - Pipeline
+            It is user defined CD pipeline
+            a pipeline code defines entire build proces whilch includes stages for building, testing, deploying application
+            ** a "pipeline" block is a key part of Declarative Pipeline syntax.
+ 
+          - Node 
+            it is also used as agent in pipeline synax code
+            It is a machine which is part of jenkins environment and it is capable of executing a pipeline
+            ** a "node" block is a key part of Scripted Pipeline syntax.
+                
+        - Stage
+            It defined conceptally distinct subsets of tasks performed througth the entire pipeline 
+               - build
+               - test
+               - deploy
+        - step
+            a step tells Jenkins what to do at a particular point in time (or "step" in the process)
+            to execute the shell command 'make' use the 'sh' step: (sh 'make')
+
+
+    
+    Pipeline syntax overview
+    
+        1. Decelrative pipeline fundamental
+            Pipeline block define all the work done
+
+          ++++++++++++++++++++++++++++++++++++++++
+        pipeline {
+             agent any 
+             stages {
+                     stage('Build') { 
+                                 steps {
+                                        // 
+                                 }
+                      }
+                     stage('Test') { 
+                                 steps {
+                                         // 
+                                 }
+                     }
+                     stage('Deploy') { 
+                                 steps {
+                                            // 
+                                 }
+                     }
+             }
+        }       
+        ++++++++++++++++++++++++++++++++++++++++++++++           
+        
+        2. Scripted pipeline fundamentals
+            In Scripted Pipeline syntax, one or more node blocks do the core work throughout the entire Pipeline
+            Although this is not a mandatory requirement of Scripted Pipeline syntax, confining your Pipeline’s work inside of a node block does two things
+
+            i. Schedules the steps contained within the block to run by adding an item to the Jenkins queue. As soon as an executor is free on a node, the steps will run.
+            ii. Creates a workspace (a directory specific to that particular Pipeline) where work can be done on files checked out from source control.
+         
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        node {  
+           stage('Build') { 
+                         // 
+             }
+            stage('Test') { 
+                         // 
+             }
+             stage('Deploy') { 
+                          // 
+             }
+        }
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+    Learned about how to use SCM to define jenkinsFile through classicUI
+      -  Jenkins file should be loacated to root of the reposotiory where your code is stored
+      -  Since Pipeline code (i.e. Scripted Pipeline in particular) is written in Groovy-like syntax, if your IDE is not correctly syntax highlighting your Jenkinsfile, try inserting the line #!/usr/bin/env groovy at the top of the Jenkinsfile, [4] footnotegroovy_shebang:[Shebang line (Groovy syntax)] which may rectify the issue.
+
+    Build in documentation
+        Pipeline ships with built-in documentation features to make it easier to create Pipelines of varying complexities
+        his built-in documentation is automatically generated and updated based on the plugins installed in the Jenkins instance.
+        Can be found on jenkins local web server -- at url  {you_lenkins_url}/pipeline-syntax
+
+    Snippet Generator
+        Can be found on jenkins local web server -- at url  {your_jenkins_url}/pipeline-syntax
+
+        To generate a step snippet with the Snippet Generator:
+            - Navigate to the Pipeline Syntax link (referenced above) from a configured Pipeline, or at ${YOUR_JENKINS_URL}/pipeline-syntax.
+            - Select the desired step in the Sample Step dropdown menu
+            - Use the dynamically populated area below the Sample Step dropdown to configure the selected step
+            - Click Generate Pipeline Script to create a snippet of Pipeline which can be copied and pasted into a Pipeline.
+
+        it can be helphul when generating complex descriptive pipeline, it will peovide us syntax and we just have to type value we need and pipeline will be jenerated , that we can copy and add in our Jenkinsfiles
+
+    Global Variable Reference
+       - Like the Snippet Generator, it is also dynamically populated by plugins.
+       - Unlike the Snippet Generator however, the Global Variable Reference only contains documentation for variables provided by Pipeline or plugins, which are available for Pipelines.
+
+       - The variables provided by default in Pipeline are:
+
+            1. env : expose environment variable
+            2. params : expose all the parameter defiend for the pipeline.
+            3. currentBuild : 
+               - May be used to discover information about the currently executing Pipeline, with properties such as currentBuild.result , etc
+               - Consult the built-in global variable reference at ${YOUR_JENKINS_URL}/pipeline-syntax/globals for a complete, and up to date, list of properties available on currentBuild
+ 
+
+    Declerative directive generator
+       - Snippet generator not provide help related to section and directives used to defined in declerative pipeline
+       - this help with that
+       - the Directive Generator allows you to choose a Declarative directive, configure it in a form, and generate the configuration for that directive, which you can then use in your Declarative Pipeline.
+        
+       - go to link ${YOUR_JENKINS_URL}/directive-generator
+    
+       - The Directive Generator can generate configuration for nested directives, such as conditions inside a when directive, but it cannot generate Pipeline steps. For the contents of directives which contain steps, such as steps inside a stage or conditions like always or failure inside post, the Directive Generator adds a placeholder comment instead. You will still need to add steps to your Pipeline by hand.
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
