@@ -1,0 +1,65 @@
+
+
+--------------------------------------------------------------------
+1.  OSI model
+     - 7 layers
+     - each layer have different functions to aid in transmitting information from one system to another,
+     -  layers encapsulate information from the layer in front of it ( -->);
+
+Application --> Presentation --> session -->Transport --> Network --> DataLink --> Physical
+
+
+   - application layer:-
+        - its the  top layer of OSI mode and this is the layer with which user interact
+        - This layer is not where actual applications live, but it provides
+            the interface for applications that use it like a web browser
+        - this layer are responsible for displaying and arranging data requested and sent over the network
+
+   - Presentation Layer
+        - This layer provides independence from data representation by translating between application and network formats.
+        - It can be referred to as the syntax layer
+        - This layer allows two systems to use different encodings for data and still pass data between them.
+        - Encryption is also done at this layer
+
+    - Session layer
+        -The Session layer is responsible for the duplex of the connection, in other words, whether sending and receiving data at the same time 
+        - establishes procedures for performing checkpointing, suspending, restarting, and terminating a session 
+        - It builds, manages, and terminates the connections between the local and remote applications.
+
+    - Transport layer
+        - The Transport layer transfers data between applications, providing reliable data transfer services to the upper layers.
+        - Transport layer controls a given connection’s reliability through flow control, segmentation and desegmentation, and error control.
+        - This layer tracks the segments and retransmits those that fail
+        - t also provides the acknowledgment of successful data transmission and sends the next data if no errors occurred
+    
+    - Network layer
+        - The Network layer implements a means of transferring variable-length data flows from a host on one network to a host on another network while sustaining service quality.
+        - The Network layer performs routing functions and might also perform fragmentation and reassembly while reporting delivery errors
+        - Several management protocols belong to the Network layer, including routing protocols, multicast group management, network-layer information, error handling, and network-layer address assignment
+
+    - Data Link layer
+        - This layer is responsible for the host-to-host transfers on the same network
+        - It defines the protocols to create and terminate the connections between two device
+        - The Data Link layer transfers data between network hosts and provides the means to detect and possibly correct errors from the Physical layer
+    
+    - Physical layer
+        - This layer converts data in the form of digital bits into electrical, radio, or optical signals.
+        - The wire signaling protocols are also defined at this layer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
