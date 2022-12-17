@@ -1,0 +1,187 @@
+
+------------------------------------------------------------------------------------
+++++++++++++++++++++++    Using JenkinsFile ++++++++++++++++++++++++++++++++++++++++
+
+
+     Pipeline supports two syntaxes
+       - Declerative    (using agent)
+       - Scriptive      (using node)
+       - it’s generally considered a best practice to create a Jenkinsfile and check the file into the source control repository.
+       
+
+    Build stage
+        - this stage of the Pipeline will be where source code is assembled, compiled, or packaged.
+        - Jenkinsfile is not a replacement for an existing build tool such as GNU/Make, Maven, Gradle, etc, but rather can be viewed as a glue layer to bind the multiple phases of a project’s development lifecycle (build, test, deploy, etc) together.
+        
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                sh 'make' 
+                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
+            }
+        }
+    }
+}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        -  	The sh step invokes the make command and will only continue if a zero exit code is returned by the command. Any non-zero exit code will fail the Pipeline.
+        -   archiveArtifacts captures the files built matching the include pattern (**/target/*.jar) and saves them to the Jenkins controller for later retrieval
+        -   Archiving artifacts is not a substitute for using external artifact repositories such as Artifactory or Nexus and should be considered only for basic reporting and file archival
+
+
+
+
+    Test stage
+        -Jenkins has a number of test recording, reporting, and visualization facilities provided by a number of plugins
+        - At a fundamental level, when there are test failures, it is useful to have Jenkins record the failures for reporting and visualization in the web UI.
+
+        example below uses the junit step, provided by the JUnit plugin.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+pipeline {
+    agent any
+
+    stages {
+        stage('Test') {
+            steps {
+                /* `make check` returns non-zero on test failures,
+                * using `true` to allow the Pipeline to continue nonetheless
+                */
+                sh 'make check || true' 
+                junit '**/target/*.xml' 
+            }
+        }
+    }
+}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+         Based on the recorded test reports, Jenkins can also provide historical trend analysis and visualization.
+
+        - Using an inline shell conditional (sh 'make check || true') ensures that the sh step always sees a zero exit code, giving the junit step the opportunity to capture and process the test report
+        -junit captures and associates the JUnit XML files matching the inclusion pattern (**/target/*.xml).
+
+
+
+
+    Deploy Stage
+        -Deployment can imply a variety of steps, depending on the project or organization requirements, and may be anything from publishing built artifacts to an Artifactory server, to pushing code to a production system
+        -At this stage of the example Pipeline, both the "Build" and "Test" stages have successfully executed. In essence, the "Deploy" stage will only execute assuming previous stages completed successfully, otherwise the Pipeline would have exited early
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Deploy') {
+            when {
+              expression {
+                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+              }
+            }
+            steps {
+                sh 'make publish'
+            }
+        }
+    }
+}
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    Accessing the currentBuild.result variable allows the Pipeline to determine if there were any test failures. In which case, the value would be UNSTABLE.
+
+
+
+    - Assuming everything has executed successfully in the example Jenkins Pipeline, each successful Pipeline run will have associated build artifacts archived, test results reported upon and the full console output all in Jenkins.
+    - A Scripted Pipeline can include conditional tests (shown above), loops, try/catch/finally blocks and even functions.
+
+
+
+
+    Using environment variables
+         - lst of all environmental variable
+            ${YOUR_JENKINS_URL}/pipeline-syntax/globals#env 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        
+Jenkinsfile (Declarative Pipeline)
+
+pipeline {
+    agent any
+    stages {
+        stage('Example') {
+            steps {
+                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+            }
+        }
+    }
+}
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    setting env variable
+       - Environment variables can be set at run time and can be used by shell scripts
+       - Each script can either returnStatus or returnStdout.
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+pipeline {
+    agent any 
+    environment {
+        // Using returnStdout
+        CC = """${sh(
+                returnStdout: true,
+                script: 'echo "clang"'
+            )}""" 
+        // Using returnStatus
+        EXIT_STATUS = """${sh(
+                returnStatus: true,
+                script: 'exit 1'
+            )}"""
+    }
+    stages {
+        stage('Example') {
+            environment {
+                DEBUG_FLAGS = '-g'
+            }
+            steps {
+                sh 'printenv'
+            }
+        }
+    }
+}
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+         - When using returnStdout a trailing whitespace will be appended to the returned string. Use .trim() to remove this.
+
+
+
+    
+
+
+
+
+
+    Handling credentials
+        - Credentials configured in Jenkins can be handled in Pipelines for immediate use
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
