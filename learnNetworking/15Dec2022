@@ -48,17 +48,27 @@ Application --> Presentation --> session -->Transport --> Network --> DataLink -
 
 
 
+-----------------------------------------------------------------------------------------------------------------------------------
 
 
 
+OSI layer details
 
+Layer_number           Layer name             Protocol data unit         Functional overview
 
+7                     Application                    Data                 High-level APIs and application protocols like HTTP, DNS, and SSH.
 
+6                     Presentation                   Data                Character encoding, data compression, and encryption/decryption. Function overview5SessionDataContinuous data exchanges between nodes are managed here: how much data to send, when to send more.
 
+5                      Session                       Data                   Continuous data exchanges between nodes are managed here: how much data to send, when to send more.
 
+4                     Transport                   Segment,datagram            Transmission of data segments between endpoints on a network, including segmentation, acknowledgment, and multiplexing.
 
+3                     Network                       Packet                    Structuring and managing addressing, routing, and traffic control for all endpoints on the network.
 
+2                     Data Link                     Frame                     Transmission of data frames between two nodes connected by a Physical layer.
 
+1                     Physical                         Bit                      Sending and receiving of bitstreams over the medium.
 
 
 
