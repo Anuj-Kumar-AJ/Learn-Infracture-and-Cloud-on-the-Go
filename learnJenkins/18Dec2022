@@ -1,0 +1,207 @@
+    
+    HAndling credentials
+        -Jenkins' declarative Pipeline syntax has the credentials() helper method (used within the environment directive) which supports secret text, username and password, as well as secret file credentials
+
+--------------  Defining globally scoped credential------
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+pipeline {
+    agent {
+        // Define agent details here
+    }
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
+    }
+    stages {
+        stage('Example stage 1') {
+            steps {
+                // 
+            }
+        }
+        stage('Example stage 2') {
+            steps {
+                // 
+            }
+        }
+    }
+}
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+------------    Defining credential with stages --------
+
+    - use credentials binding plugin to use cerdential in jenkins file 
+
+
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+pipeline {
+    agent {
+        // Define agent details here
+    }
+    stages {
+        stage('Example stage 1') {
+            environment {
+                BITBUCKET_COMMON_CREDS = credentials('jenkins-bitbucket-common-creds')
+            }
+            steps {
+                // 
+            }
+        }
+        stage('Example stage 2') {
+            steps {
+                // 
+            }
+        }
+    }
+}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        - If you need to set credentials in a Pipeline for anything other than secret text, usernames and passwords, or secret files (above) - i.e SSH keys or certificates, then use Jenkins' Snippet Generator feature, which you can access through Jenkins' classic UI.
+
+        -  some common credential in JEnkins
+            - secret text
+            - username and password
+            - secretfile
+                - A secret file is a credential which is stored in a file and uploaded to Jenkins. Secret files are used for credentials that are too unwieldy to enter directly into Jenkins, and/or  in binary format, such as a GPG file
+
+
+
+-------------------------------------------------------------------------------
+                tour of Jenkins features
+
+    1. timeouts , retries and more
+        -  always use timeout with input field , if not the jenkins will continue to consume resoures till we give input
+        - when there is global timeout and stage timeout , both present then the job will take that timeout which is smallest of both 
+       
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+pipeline {
+    agent any
+    stages {
+        stage('Deploy') {
+            steps {
+                retry(3) {
+                    sh './flakey-deploy.sh'
+                }
+
+                timeout(time: 3, unit: 'MINUTES') {
+                    sh './health-check.sh'
+                }
+            }
+        }
+    }
+}
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    - The "Deploy" stage retries the flakey-deploy.sh script 3 times, and then waits for up to 3 minutes for the health-check.sh script to execute. If the health check script does not complete in 3 minutes, the Pipeline will be marked as having failed in the "Deploy" stage
+
+
+
+
+
+    if we wanted to retry our deployment 5 times, but never want to spend more than 3 minutes in total before failing the stage:
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+pipeline {
+    agent any
+    stages {
+        stage('Deploy') {
+            steps {
+                timeout(time: 3, unit: 'MINUTES') {
+                    retry(5) {
+                        sh './flakey-deploy.sh'
+                    }
+                }
+            }
+        }
+    }
+}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    Finishing up
+        - When the Pipeline has finished executing, you may need to run clean-up steps or perform some actions based on the outcome of the Pipeline. These actions can be performed in the post section.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+pipeline {
+    agent any
+    stages {
+        stage('Test') {
+            steps {
+                sh 'echo "Fail!"; exit 1'
+            }
+        }
+    }
+    post {
+        always {
+            echo 'This will always run'
+        }
+        success {
+            echo 'This will run only if successful'
+        }
+        failure {
+            echo 'This will run only if failed'
+        }
+        unstable {
+            echo 'This will run only if the run was marked as unstable'
+        }
+        changed {
+            echo 'This will run only if the state of the Pipeline has changed'
+            echo 'For example, if the Pipeline was previously failing but is now successful'
+        }
+    }
+}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+
+    2. Defining execution environments
+
+        - The agent directive tells Jenkins where and how to execute the Pipeline, or subset thereof
+        - Underneath the hood, there are a few things agent causes to happen:
+            - All the steps contained within the block are queued for execution by Jenkins. As soon as an executor is available, the steps will begin to execute.
+            - A workspace is allocated which will contain files checked out from source control as well as any additional working files for the Pipeline.
+        - There are several ways to define agents for use in Pipeline
+            - using docker ( note install docker plugin )
+                -Pipeline is designed to easily use Docker images and containers to run inside. This allows the Pipeline to define the environment and tools required without having to configure various system tools and dependencies on agents manually
+                - This approach allows you to use practically any tool which can be packaged in a Docker container.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+pipeline {
+    agent {
+        docker { image 'node:16.13.1-alpine' }
+    }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+            }
+        }
+    }
+}
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+    Attribute in JenkinsFile
+        - tools
+        - credentials
+        - parameters
+            - types  -->  string(name,defaultName, description) | choice(name,choice,description) | booleanParam(name, defaultName, description)
+        - when
+        - use External groovy script  --> script{}
+
+
+
+
+
+
+
+
