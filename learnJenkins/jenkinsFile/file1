@@ -1,0 +1,15 @@
+pipeline{
+    agent any
+    stages{
+        stage('build'){
+            sh echo "hello form build"
+        }
+        stage('test'){
+            sh echo "hello form test"
+        }
+        stage('deploy'){
+            sh echo "hello form deploy"
+        }
+        
+    }
+}
