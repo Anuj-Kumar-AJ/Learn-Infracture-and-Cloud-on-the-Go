@@ -1,0 +1,18 @@
+-------------------------------------------------------------------------
+   1. TCP/IP model
+       - TCP/IP creates a heterogeneous network with open protocols that are independent of the operating system and architectural differences. Whether the hosts are running Windows, Linux, or another OS, TCP/IP allows them to communicate;
+       - TCP/IP does not care if you are running Apache or Nginx for your web server at the Application layer.
+        
+
+    => compare TCP/IP with OSI model
+
+
+
+OSI 
+    application --> presentation --> session --> transport --> network --> dataLink --> physical
+
+TCP/IP    
+    application -------------------------------> transport --> internet -->  physical------------
+
+
+        
