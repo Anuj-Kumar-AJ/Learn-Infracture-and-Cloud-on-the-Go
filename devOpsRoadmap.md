@@ -1,8 +1,9 @@
-------------------------------------------------------------------
-+++++++++++++++++++++++ 	ROADMAP for DevOps  From saiyam Pathak	-------------------------
 
 
-~~~~~~~~~~~~~~~~~~PREREQUSITE~~~~~~~~~~~~~~
+<h1>	ROADMAP for DevOps  From saiyam Pathak	</h1>
+
+
+<h3> <b> PREREQUSITE  </b></h3>
 
 
 
@@ -33,9 +34,9 @@
 	YAML
 		
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-			MAin section
+
+<h3> <b> Main section </b></h3>
 
 
 	
