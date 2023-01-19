@@ -84,3 +84,6 @@
     eg,	git config --global alias.show-graph \
 		'log --graph --abbrev-commit --pretty=oneline'
 
+1. to look up objects by a unique prefix of the object hash:
+    - `git rev-parse prefix`
+
