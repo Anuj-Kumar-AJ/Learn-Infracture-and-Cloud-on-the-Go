@@ -1,4 +1,4 @@
-i# Index heading with file name
+# Index heading with file name
 
 1.Booting and shutting down --> [18Jan2023]
     1. Recovery boot to a shell --> [18Jan2023]
@@ -12,4 +12,9 @@ i# Index heading with file name
 
 
 
-2. Linux OS and File System --> [21JAn2023](21Jan2023.md) 
+2. Linux OS and File System --> [21Jan2023](21-22Jan2023.md) 
+3. few command and packages ,vim editor --> [23Jan2023](23Jan2023.md)
+4. file permission and redirect --> [25Jan2023](25Jan2023.md)
+5. Services --> [25Jan2023](25Jan2023.md)
+   1. - `systemctl`
+   2. - `cgroup`
