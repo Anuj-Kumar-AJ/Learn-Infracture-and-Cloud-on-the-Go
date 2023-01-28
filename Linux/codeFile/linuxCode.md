@@ -142,8 +142,13 @@
 36.  To fine tune how much system resource we assign to certain group of services.
     1.  we use `cgroup` or `control group`
 
+37. To see info about any file or executable file
+    - `file filePath`
 
-
+38. To see the time required to run 
+    - `time command` --> tiem for command
+    - `time Codefile` --> time require to run tis code file
+    
 
 
 
