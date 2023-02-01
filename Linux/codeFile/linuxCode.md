@@ -123,7 +123,8 @@
     8. now lets see the syntax for change in permission
       - `chmod changePermission fileName`
         - eg, `chmod u+x test.sh`
- 
+    9. to change permission of the directory and all the file inside of it use `-R` flag
+        - eg `chmod -R u+x directoryName `
 31.  To run multiple commands
     1. use `&&` --> `command1 && command2`
     2. use `;` --> `command1; command2`
