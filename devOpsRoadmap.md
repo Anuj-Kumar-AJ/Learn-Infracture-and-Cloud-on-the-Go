@@ -81,7 +81,7 @@
 			- run image
 		
 		- OCI, CRI, 
-		- vider of making sence of the container runtime landscape in kubernetes
+		- video of making sence of the container runtime landscape in kubernetes
   		- advance Docker Concepts
 			- Docker Security
 			- dockerFile bestPractices
@@ -89,7 +89,7 @@
 			
 
 	Kubernetes
-		must lern for all domain
+		must learn for all domain
 
 		- architecture
 		- objects
