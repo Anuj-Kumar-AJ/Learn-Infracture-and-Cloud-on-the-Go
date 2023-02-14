@@ -9,4 +9,7 @@ Index for observability
    2. Traces    --> [31JAn2023](31Jan2023.md)
    3. Metrics    --> [31JAn2023](31Jan2023.md)
 5. Prometheus-metics-solution
-6. 
+   1. SLI-SLA-SLO -->  [31JAn2023](31Jan2023.md)
+   2. Prometheus fundamental
+      1. 
+   
