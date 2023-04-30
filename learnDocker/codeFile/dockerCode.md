@@ -44,3 +44,11 @@
     - to delete a docker network
         - `docker network rm networkName`
 
+17. docker registory to store private images --> import the `registory image` which is used to store the private images
+    - to create a container for registory
+       -  `docker run -p 5000:5000 -d registry registry:2`
+    - `docker image tag myimage localhost:5000/my-image`
+    - to push image in regisory
+        - `docker push localhost:5000/myimage`
+     - to pullimage in regisory
+        - `docker pull localhost:5000/myimage`
