@@ -25,6 +25,22 @@
     - `docker stop containerID`
 12. TO list all the images
     - `docker images`
-13. 
- 
+13. TO create docker volume
+    - `docker volume create volumeName`
+14. to attach the docker volume to a contianer
+    - `docker run -v volumeName:pathToDataStorageInsideContainer imageName`   --> volume mounting
+    - `docker run -v pathWhereWeWantToStoreData:pathToDataStorageInsideContainer imageName`    --> bind mounting
+15 to attach docker volume new way is 
+    - `docker run --mount type=bind source=pathWhereWeStoreData target=pathinsideContainer imageName`
+16. docker network
+    - to create bridge network( it is default network)  --> `docker run ImageName` 
+    - to create none network --> `docker run InageName --network=host`
+    - to create None network --> `docker run InageName --network=none`
+    - to see all the docker network
+        - `docker network ls`
+    - to create custom docker network 
+        - `docker network create --driver=networkType --subnet=subnetAddress custom-isolated-network`
+    - docker have build-in DNS server , so it is best to use name rather then ip address for communication
+    - to delete a docker network
+        - `docker network rm networkName`
 
